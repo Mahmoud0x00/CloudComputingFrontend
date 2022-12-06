@@ -12,6 +12,30 @@ code {
     monospace;
 }
 
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  left: 0;
+  right: 0;
+  height: 50px;
+  width: 100%;
+  justify-content: center;
+}
+.footer-text {
+  width: 297px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #575E6B;
+  padding-left: 12px;
+  padding-right: 12cm;
+  height: 30vh;
+  overflow: auto;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
