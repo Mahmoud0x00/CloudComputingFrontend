@@ -23,10 +23,9 @@ const explore = () => {
                 <Navbar.Link href="/help" className="font-semibold via-black">Help</Navbar.Link>
                 {!authd.token &&  <Navbar.Link href="/login" className="font-semibold via-black">Login</Navbar.Link>}
                 {!authd.token &&  <Navbar.Link href="/signup" className="font-semibold via-black">Signup</Navbar.Link>}
-                {authd.token &&  <Navbar.Link href="/tickets" className="font-semibold via-black">My Tickets</Navbar.Link>}
+                {authd.token &&  <Navbar.Link href="/mytickets" className="font-semibold via-black">My Tickets</Navbar.Link>}
                 {authd.token &&  <Navbar.Link href="/myaccount" className="font-semibold via-black">My Account</Navbar.Link>}
                 {authd.token &&  <Navbar.Link href="/logout" className="font-semibold via-black">Logout</Navbar.Link>}        
-                    
             </Navbar.Collapse>
         </Navbar>
     );

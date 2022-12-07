@@ -5,7 +5,8 @@ import AuthProvider from "./store/AuthProvider";
 import Layout from "./UI/Layout/layout";
 import Home from "./pages/home";
 
-import Login from "./pages/Login";
+import MyTickets from "./pages/mytickets";
+import SigninPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 const App = () => {
   return (
@@ -13,9 +14,10 @@ const App = () => {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/mytickets" element={<MyTickets />} />
+            <Route path="/login" element={<SigninPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>
