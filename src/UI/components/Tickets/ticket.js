@@ -1,6 +1,6 @@
 const ticket = (props) => {
     return(
-        <div className="flex flex-col items-center gap-8 rounded-xl bg-slate-400 w-[500px] aspect-square overflow-hidden">
+        <div className="flex flex-col rounded-xl bg-white overflow-hidden m-1 truncate text-ellipsis">
             {props.children}
         </div>
     );

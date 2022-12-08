@@ -3,9 +3,13 @@ import Authcontext from "../../../store/Authcontext";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
+import { BsPatchCheckFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import TextInput from "../../form/Textinput";
 
+function timeout(delay) {
+    return new Promise( res => setTimeout(res, delay) );
+}
 const SigninForm = () => {
     const { register, handleSubmit, formState } = useForm();
     const navigate = useNavigate();
@@ -26,18 +30,26 @@ const SigninForm = () => {
             const responseData = await response.json();
 
             if(!response.ok){
-                throw new Error(responseData.error) || Error(responseData.message);
+                if(responseData.error){
+                throw new Error(responseData.error);
+                }else{
+                throw new Error(responseData.message);
+                }
             }
             authcontext.login(responseData.jwt);
+            localStorage.setItem('token', responseData.jwt);
             setSuccess(true);
-            setSuccessMessage(responseData.message);
+            setSuccessMessage(responseData.message + "! You are going to be redirected to the my tickets page.");
+            await timeout(1000);
             navigate('/mytickets');
         } catch (err) {
-            setError(err.message || 'Something went wrong, please try again.');
+            console.log(err.message);
+            console.log("lol")
+            setError(err.message);
         }
     }
     return (
-        <div>
+        <div className="justify-evenly flex flex-col">
             {error && (
                 <Alert color="failure" icon={HiInformationCircle}>
                     {error}
@@ -46,15 +58,16 @@ const SigninForm = () => {
             {success && (
                 <Alert
                     color="success"
+                    icon={BsPatchCheckFill}
                 >
                     {successMessage}
                 </Alert>
             )}
-            <h5 className="text-lg justify-center text-center text-blue-700 py-9" style={{
+            <h5 className="text-lg justify-center text-center text-white py-9" style={{
                 fontFamily: 'Poppins',
                 fontWeight: 'bold',
                 fontSize: '30px',
-            }}>👋Please submit your account info👋</h5>
+            }}>Please submit your account info</h5>
             <form className="flex flex-col p-10 gap-5 bg-gray-800 h-fit" onSubmit={handleSubmit(submitHandler)} style={
                 {
                     borderRadius: "40px"
@@ -67,7 +80,7 @@ const SigninForm = () => {
                     register={register}
                     validation={{ required: true }}
                 />
-                {formState.errors.email && <p className="text-red-400">Email is required</p>}
+                {formState.errors.email && <p className="text-red-400 font-bold">Email is required</p>}
 
                 <TextInput
                     label="password"
@@ -76,7 +89,7 @@ const SigninForm = () => {
                     register={register}
                     validation={{ required: true }}
                 />
-                {formState.errors.password && <p className="text-red-500">Password is required</p>}
+                {formState.errors.password && <p className="text-red-500 font-bold">Password is required</p>}
                 <button
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -84,6 +97,7 @@ const SigninForm = () => {
                     Sign In
                 </button>
             </form>
+            <p className="text-2x text-white font-bold text-center"> To register <a href="/signup" className="text-bold text-white underline hover:text-blue-300 italic">Click here</a></p>
         </div>
     );
 };

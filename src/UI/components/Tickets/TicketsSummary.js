@@ -9,23 +9,22 @@ import { useNavigate } from "react-router-dom";
 const TicketSummary = (props) => {
     const navigate = useNavigate();
     const btnOnClickHandler = () => {
-        navigate(`/tickets/${props.id}`);
+        navigate(`/tickets/${props.ticket._id}`);
     };
-        return (
+
+    return (
             <Ticket>
-                <TicketHeader title={props.title} status={props.status} />
+                <TicketHeader title={props.ticket.title} status={props.ticket.status} />
                 <Ticketbody>
-                    <p>{props.description.substring(0,50) + '...'}</p>
+                    <p>{props.ticket.body}</p>
                 </Ticketbody>
                 <Ticketaction>
-                    <Button 
-                        onClick={btnOnClickHandler}
-                    >
+                    <Button onClick={btnOnClickHandler}>
                         View
                     </Button>
                 </Ticketaction>
             </Ticket>
-        );
+    );
 };
 
 export default TicketSummary;

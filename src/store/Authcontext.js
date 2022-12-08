@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const Authcontext = createContext({
-    token: '',
+    token: '' || localStorage.getItem("token"),
     login: (token) => {},
     logout: () => {}
 });

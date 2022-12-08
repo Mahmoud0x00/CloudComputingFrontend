@@ -1,16 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, {useState, useEffect, useContext} from "react";
 import TicketsList from "../UI/components/Tickets/TicketsList";
 import Authcontext from "../store/Authcontext";
-import { Spinner } from "flowbite-react";
 import { Navigate } from "react-router-dom";
+import AbortController from "abort-controller";
 
 const MyTickets = () => {
     const [tickets, setTickets] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const authd = useContext(Authcontext);
-    const jwt = authd.token;
+    const jwt = authd.token || localStorage.getItem("token");
 
-useEffect(() => {
+    useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchTickets = async () => {
         try {
             const response = await fetch("http://localhost:9000/api/ticket/getUserTickets", {
@@ -18,47 +21,44 @@ useEffect(() => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + jwt
-                }
+                },
+                signal: signal
             });
             const responseData = await response.json();
             if(!response.ok){
                 throw new Error(responseData.error);
             }
-            console.log(responseData.tickets);
             setTickets(responseData.tickets);
-            setIsLoading(false);
         } catch (err) {
             console.log(err);
         }
     };
     fetchTickets();
-}, [jwt]);
+    return () => {
+        controller.abort();
+    }
+}, []);
 
-    if(authd.token === null){
+    if(authd.token === null && localStorage.getItem("token") === null){
         return <Navigate to="/login" />
     }
-    if(isLoading){
-        return(
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh"
-        }}>
-            <Spinner
-                color="success"
-                aria-label="Purple spinner example"
-                size="2xl"
-            />
-        </div>
+    if(tickets.length === 0){
+        return (
+            <div className="flex justify-center py-10">
+                <h1 className="text-3xl font-bold">You have no tickets yet!</h1>
+            </div>
         );
     }
-
     return (
-        <>
-        {tickets.length === 0 && <div className="text-center text-2xl text-blue-700 py-20">You have no tickets</div>}
-        {tickets.length > 0 && <TicketsList tickets={tickets} />}
-        </>
+        <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+        }}>
+        <TicketsList tickets={tickets} />
+        </div>
     );
 };
 

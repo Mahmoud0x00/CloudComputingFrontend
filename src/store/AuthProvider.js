@@ -8,6 +8,9 @@ const AuthProvider = (props) => {
     const authcontext = {
         token: token,
         login: (token) => {
+            if(token === null){
+                setToken(localStorage.getItem("token"));
+            }
             setToken(token);
         },
         logout: () => {

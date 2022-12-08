@@ -41,7 +41,7 @@ const SignUpForm = () => {
                 Account created successfully!, You are going to be redirected to the login page.
             </Alert>
         )}       
-        <h5 className="text-lg justify-center text-center text-blue-700 py-9" style={{
+        <h5 className="text-lg justify-center text-center text-white py-9" style={{
             fontFamily: 'Poppins',
             fontWeight: 'bold',
             fontSize: '30px',
@@ -90,11 +90,12 @@ const SignUpForm = () => {
                     )}
                 <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded bg-center"
                 >
                     Sign Up
                 </button>
             </form>
+            <p className="text-2x text-slate-50 font-bold text-center">Have an account already? <a href="/login" className="text-bold text-white underline hover:text-blue-300 italic">Login now</a></p>
         </div>
     );
 };
