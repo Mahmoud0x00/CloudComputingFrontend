@@ -93,14 +93,14 @@ const GetArticleByID = () => {
 
 
     return (
-        <div className='flex gap-4'>
+        <div className='flex gap-4 flex-row'>
 
             <div>
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h1>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{article.content}</p>
                 <div className="flex flex-wrap gap-2">
                     <div>
-                        <Button href={'/addComment/' + article._id}>
+                        <Button className='mb-3' href={'/addComment/' + article._id}>
                             Add Comment On article
                         </Button>
 
@@ -115,7 +115,7 @@ const GetArticleByID = () => {
             <div className='flex gap-4'>
             <div>
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Comments</h1>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2">
                     {comment.map((comm) => (
                         <Card key={comment._id} className="w-full max-w-sm">
                             <div className="flex flex-col">
