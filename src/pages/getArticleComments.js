@@ -11,15 +11,9 @@ const GetArticleComments = () => {
     const parms = useParams();
     const articleID = parms.id;
     useEffect(() => {
-         const fetchAbortController = new AbortController();
-            const fetchSignal = fetchAbortController.signal;
             const fetchComments = async () => {
                 try {
-                    const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`,
-                        {
-                            signal: fetchSignal
-                        }
-                    );
+                    const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`);
                     const responseData = await response.json();
                     if (!response.ok) {
                         throw new Error(responseData.message);
@@ -32,10 +26,6 @@ const GetArticleComments = () => {
                 }
             };
             fetchComments();
-
-            return () => {
-                fetchAbortController.abort();
-            }
     }, [articleID]);
     // if (isLoading) {
     //     return <h1>Please wait while loading Articles...</h1>;

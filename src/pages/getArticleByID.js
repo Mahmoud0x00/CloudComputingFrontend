@@ -13,12 +13,9 @@ const GetArticleByID = () => {
 
         const DeleteArticle = async (articleID) => {
         try {
-            const fetchAbortController = new AbortController();
-            const fetchSignal = fetchAbortController.signal;
             const response = await fetch(`http://localhost:9000/api/article/deleteArticle/${articleID}`,
                 {
-                    method: 'DELETE',
-                    signal: fetchSignal
+                    method: 'DELETE'
                 }
             );
             //const responseData = await response.json();
@@ -33,16 +30,10 @@ const GetArticleByID = () => {
         }
     };
     useEffect(() => {
-        const fetchAbortController = new AbortController();
-        const fetchSignal = fetchAbortController.signal;
 
         const fetchArticles = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/article/getArticle/${articleID}`,
-                    {
-                        signal: fetchSignal
-                    }
-                );
+                const response = await fetch(`http://localhost:9000/api/article/getArticle/${articleID}`);
                 const responseData = await response.json();
                 if (!response.ok) {
                     throw new Error(responseData.message);
@@ -57,11 +48,7 @@ const GetArticleByID = () => {
 
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`,
-                    {
-                        signal: fetchSignal
-                    }
-                );
+                const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`);
                 const responseData = await response.json();
                 if (!response.ok) {
                     throw new Error(responseData.message);
@@ -79,10 +66,6 @@ const GetArticleByID = () => {
 
         fetchArticles();
         fetchComments();
-
-        return () => {
-            fetchAbortController.abort();
-        };
     }, [articleID]);
 
     // if (isLoading) {

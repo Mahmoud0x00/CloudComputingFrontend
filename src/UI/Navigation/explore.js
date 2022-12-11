@@ -40,9 +40,6 @@ const Explore = () => {
         if(expire){
             authd.logout();
         }
-        return () => {
-            controller.abort();
-        }
     },[]);
 
     return (

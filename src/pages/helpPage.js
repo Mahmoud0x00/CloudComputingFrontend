@@ -13,16 +13,10 @@ const HelpPage = () => {
 
 
     useEffect(() => {
-        const fetchAbortController = new AbortController();
-        const fetchSignal = fetchAbortController.signal;
         
         const fetchArticles = async () => {
            try{
-            const response = await fetch(`http://localhost:9000/api/article/getArticles`,
-            {
-                signal: fetchSignal
-            }
-            );
+            const response = await fetch(`http://localhost:9000/api/article/getArticles`);
             const responseData = await response.json();
             if(!response.ok) {
                 throw new Error(responseData.message);
@@ -36,9 +30,6 @@ const HelpPage = () => {
     };
     fetchArticles();
 
-    return () => {
-        fetchAbortController.abort();
-    };
 }, []);
 
     return (

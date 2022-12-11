@@ -11,14 +11,10 @@ const AddArticleComment = () => {
     const articleID = parms.id;
 
     useEffect(() => {
-        const fetchAbortController = new AbortController();
-        const fetchSignal = fetchAbortController.signal;
-
         const fetchArticles = async () => {
             try {
                 const response = await fetch(`http://localhost:9000/api/article/addComment/${articleID}`,
                     {
-                        signal: fetchSignal,
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -45,9 +41,6 @@ const AddArticleComment = () => {
         };
         fetchArticles();
 
-        return () => {
-            fetchAbortController.abort();
-        }
     }, [articleID, comment]);
 
 

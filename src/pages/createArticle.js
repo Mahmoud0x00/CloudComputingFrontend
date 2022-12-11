@@ -10,8 +10,6 @@ const CreateArticle = () => {
     const [content, setContent] = useState('');
 
 useEffect(() => {
-    const fetchAbortController = new AbortController();
-    const fetchSignal = fetchAbortController.signal;
 
     const fetchArticles = async () => {
         try {
@@ -24,8 +22,7 @@ useEffect(() => {
                     body: JSON.stringify({
                         title: title,
                         content: content
-                    }),
-                    signal: fetchSignal
+                    })
                 }
             );
             const responseData = await response.json();
@@ -38,9 +35,6 @@ useEffect(() => {
         }
     };
     fetchArticles();
-    return () => {
-        fetchAbortController.abort();
-    };
 }, [title, content]);
 
     const titleChangeHandler = (event) => {

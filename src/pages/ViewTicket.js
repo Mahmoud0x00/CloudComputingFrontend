@@ -135,8 +135,7 @@ const EditTicket = () => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + token
-                    },
-                    signal: signal
+                    }
                 });
                 const responseData = await response.json();
                 if(!response.ok){
@@ -158,8 +157,7 @@ const EditTicket = () => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + token
-                    },
-                    signal: signal
+                    }
                 });
                 const responseData = await response.json();
                 if(!response.ok){
@@ -181,7 +179,7 @@ const EditTicket = () => {
 
     return (
         <div className="container">
-            {!error && (
+            {!error === false && (
                 <Alert
                 color="failure"
                 icon={HiInformationCircle}
