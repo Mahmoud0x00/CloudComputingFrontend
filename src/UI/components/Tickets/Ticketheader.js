@@ -1,7 +1,10 @@
 
 import { Badge } from "flowbite-react";
+import React from "react";
+import reactElementToJSXString from 'react-element-to-jsx-string';
 
 const TicketHeader = (props) => {
+    const jsx = reactElementToJSXString(props.title);
     return (
         <div className="flex justify-center rounded border-solid">
             <div className="flex flex-col items-center max-w-xs line-clamp-2" style={{
@@ -14,7 +17,7 @@ const TicketHeader = (props) => {
                 fontSize: "1.2rem",
                 paddingLeft: "1cm",
             }}>
-                <h1>{props.title}</h1>
+                <h1>{jsx.substring(0,20)}</h1>
             </div>
             <div style={{
                 height: "100%",

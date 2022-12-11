@@ -36,22 +36,21 @@ const SigninForm = () => {
                 throw new Error(responseData.message);
                 }
             }
-            authcontext.login(responseData.jwt);
+            authcontext.login(responseData.jwt, responseData.userId);
             localStorage.setItem('token', responseData.jwt);
+            localStorage.setItem('userId', responseData.userId);
             setSuccess(true);
             setSuccessMessage(responseData.message + "! You are going to be redirected to the my tickets page.");
-            await timeout(1000);
+            await timeout(500);
             navigate('/mytickets');
         } catch (err) {
-            console.log(err.message);
-            console.log("lol")
             setError(err.message);
         }
     }
     return (
         <div className="justify-evenly flex flex-col">
             {error && (
-                <Alert color="failure" icon={HiInformationCircle}>
+                <Alert color="failure" icon={HiInformationCircle} rounded={true} onDismiss={true} withBorderAccent={true}>
                     {error}
                 </Alert>
             )}

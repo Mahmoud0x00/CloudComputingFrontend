@@ -10,6 +10,8 @@ import SigninPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import Logout from "./pages/logout";
 import Createticket from "./pages/Createticket";
+import Myaccount from "./pages/Myaccount";
+import ViewTicket from "./pages/ViewTicket";
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
             <Route path="/login" element={<SigninPage />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/createticket" element={<Createticket />} />
+            <Route path="/myaccount" element={<Myaccount />} />
+            <Route path="/tickets/:ticketId" element={<ViewTicket />} />
           </Routes>
         </Layout>
       </BrowserRouter>

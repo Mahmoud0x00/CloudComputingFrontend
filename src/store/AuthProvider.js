@@ -4,17 +4,21 @@ import { useState } from 'react';
 
 const AuthProvider = (props) => {
     const [token, setToken] = useState(null);
-
+    const [id, setId] = useState(null);
     const authcontext = {
         token: token,
-        login: (token) => {
+        userId: id,
+        login: (token,userId) => {
             if(token === null){
                 setToken(localStorage.getItem("token"));
+                setId(localStorage.getItem("userId"));
             }
+            setId(userId);
             setToken(token);
         },
         logout: () => {
             setToken(null);
+            setId(null);
         }
     };
     return (

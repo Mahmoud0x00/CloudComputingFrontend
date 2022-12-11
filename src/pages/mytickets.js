@@ -56,6 +56,7 @@ const MyTickets = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
+            columnCount: "2",
         }}>
         <TicketsList tickets={tickets} />
         </div>

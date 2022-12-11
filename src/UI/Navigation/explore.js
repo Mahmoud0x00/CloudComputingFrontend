@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect,useState } from "react";
 import { Navbar } from "flowbite-react";
 import AutheContext from "../../store/Authcontext";
@@ -40,10 +41,13 @@ const Explore = () => {
             getCurrentUser();
             authd.login(localStorage.getItem('token'));
         }
+        if(expire){
+            authd.logout();
+        }
         return () => {
             controller.abort();
         }
-    },[expire, authd]);
+    },[]);
 
     return (
         <Navbar fluid={true} rounded={true}>

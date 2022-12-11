@@ -15,9 +15,7 @@ const TicketSummary = (props) => {
     return (
             <Ticket>
                 <TicketHeader title={props.ticket.title} status={props.ticket.status} />
-                <Ticketbody>
-                    <p>{props.ticket.body}</p>
-                </Ticketbody>
+                <Ticketbody body={props.ticket.body}/>
                 <Ticketaction>
                     <Button onClick={btnOnClickHandler}>
                         View

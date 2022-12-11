@@ -60,7 +60,7 @@ const CreateTicket = () => {
                 <Alert
                 color={success}
                 icon={BsPatchCheckFill}
-                className="bg-green-500 text-white"
+                className="bg-green-500 text-white mb-3"
                 >
                 {successMessage}
                 </Alert>
