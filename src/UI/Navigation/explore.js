@@ -1,11 +1,53 @@
-import { useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect,useState } from "react";
 import { Navbar } from "flowbite-react";
 import AutheContext from "../../store/Authcontext";
 import logo from "../../images/Logo.png";
+import AbortController from "abort-controller";
 
-const explore = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+const Explore = () => {
     const authd = useContext(AutheContext);
+    const [expire, setExpire] = useState(false);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const getCurrentUser = async () => {
+            try {
+                const response = await fetch("http://localhost:9000/api/user/getUser", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    signal: signal
+                });
+                const responseData = await response.json();
+
+                if (!response.ok) {
+                    if (responseData.error === "jwt expired") {
+                        setExpire(true);
+                        localStorage.removeItem("token");
+                    } else {
+                    throw new Error(responseData.message);
+                    }
+                }
+            } catch (err) {
+                console.log(err);
+            }
+
+        }
+        if(localStorage.getItem('token') && expire === false){
+            getCurrentUser();
+            authd.login(localStorage.getItem('token'));
+        }
+        if(expire){
+            authd.logout();
+        }
+        return () => {
+            controller.abort();
+        }
+    },[]);
 
     return (
         <Navbar fluid={true} rounded={true}>
@@ -21,16 +63,15 @@ const explore = () => {
             <Navbar.Toggle />
             <Navbar.Collapse>
                 <Navbar.Link href="/help" className="font-semibold via-black">Help</Navbar.Link>
+                {authd.token &&  <Navbar.Link href="/createticket" className="font-semibold via-black">Create Ticket</Navbar.Link>}         
                 {!authd.token &&  <Navbar.Link href="/login" className="font-semibold via-black">Login</Navbar.Link>}
                 {!authd.token &&  <Navbar.Link href="/signup" className="font-semibold via-black">Signup</Navbar.Link>}
-                {authd.token &&  <Navbar.Link href="/tickets" className="font-semibold via-black">My Tickets</Navbar.Link>}
+                {authd.token &&  <Navbar.Link href="/mytickets" className="font-semibold via-black">My Tickets</Navbar.Link>}
                 {authd.token &&  <Navbar.Link href="/myaccount" className="font-semibold via-black">My Account</Navbar.Link>}
-                {authd.token &&  <Navbar.Link href="/logout" className="font-semibold via-black">Logout</Navbar.Link>}    
- 
-                    
+                {authd.token &&  <Navbar.Link href="/logout" className="font-semibold via-black">Logout</Navbar.Link>}      
             </Navbar.Collapse>
         </Navbar>
     );
 };
 
-export default explore;
+export default Explore;

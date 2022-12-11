@@ -4,26 +4,21 @@ import { useState } from 'react';
 
 const AuthProvider = (props) => {
     const [token, setToken] = useState(null);
-    const [userId, setUserId] = useState(null);
-    const [userType, setUserType] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const [id, setId] = useState(null);
     const authcontext = {
         token: token,
-        userId: userId,
-        userType: userType,
-        isLoggedIn: isLoggedIn,
-        login: (id, userId, token, userType) => {
+        userId: id,
+        login: (token,userId) => {
+            if(token === null){
+                setToken(localStorage.getItem("token"));
+                setId(localStorage.getItem("userId"));
+            }
+            setId(userId);
             setToken(token);
-            setUserId(userId);
-            setUserType(userType);
-            setIsLoggedIn(true);
         },
         logout: () => {
             setToken(null);
-            setUserId(null);
-            setUserType(null);
-            setIsLoggedIn(false);
+            setId(null);
         }
     };
     return (

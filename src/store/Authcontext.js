@@ -1,10 +1,9 @@
 import { createContext } from "react";
 
 const Authcontext = createContext({
-    token: '',
-    userId: '',
-    userType: '',
-    login: (userId, token, userType) => {},
+    token: '' || localStorage.getItem("token"),
+    userId: '' || localStorage.getItem("userId"),
+    login: (token,userId) => {},
     logout: () => {}
 });
 
