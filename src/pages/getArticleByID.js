@@ -11,25 +11,27 @@ const GetArticleByID = () => {
     const parms = useParams();
     const articleID = parms.id;
 
-    //     const DeleteArticle = async () => {
-    //     try {
-    //         const response = await fetch(`http://localhost:9000/api/article/deleteArticle/${articleID}`,
-    //             {
-    //                 method: 'DELETE',
-    //                 signal: fetchSignal
-    //             }
-    //         );
-    //         const responseData = await response.json();
-    //         if (!response.ok) {
-    //             throw new Error(responseData.message);
-    //         }
-    //         setArticle(responseData.article);
-    //         //setIsLoading(false);
-    //     } catch (err) {
-    //         console.log(err);
+        const DeleteArticle = async (articleID) => {
+        try {
+            const fetchAbortController = new AbortController();
+            const fetchSignal = fetchAbortController.signal;
+            const response = await fetch(`http://localhost:9000/api/article/deleteArticle/${articleID}`,
+                {
+                    method: 'DELETE',
+                    signal: fetchSignal
+                }
+            );
+            //const responseData = await response.json();
+            if (!response.ok) {
+                throw new Error(response.message);
+            }
+            setArticle(response.article);
+            //setIsLoading(false);
+        } catch (err) {
+            console.log(err);
 
-    //     }
-    // };
+        }
+    };
     useEffect(() => {
         const fetchAbortController = new AbortController();
         const fetchSignal = fetchAbortController.signal;
@@ -106,7 +108,7 @@ const GetArticleByID = () => {
 
 
 
-                        <Button href={''+ article._id}>
+                        <Button onSubmit={DeleteArticle(article._id)}>
                             Delete Article
                         </Button>
                     </div>
