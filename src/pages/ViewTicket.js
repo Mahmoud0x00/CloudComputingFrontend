@@ -5,7 +5,6 @@ import {json, useParams} from "react-router-dom";
 import { BsPatchCheckFill } from 'react-icons/bs';
 import {HiInformationCircle,HiTicket,HiChatAlt2} from 'react-icons/hi';
 import Authcontext from "../store/Authcontext";
-import AbortController from "abort-controller";
 import { Button, Comment, Container, Divider, Form, Header,Label,Icon,TextArea, Input } from 'semantic-ui-react'
 import { Alert,Tabs,FileInput } from "flowbite-react";
 import { useForm } from 'react-hook-form';
@@ -107,8 +106,6 @@ const EditTicket = () => {
     }
 
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
         const getTicket = async () => {
             try {
                 const response = await fetch(`http://localhost:9000/api/ticket/retrive/${id}`, {
@@ -116,8 +113,7 @@ const EditTicket = () => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + token
-                    },
-                    signal: signal
+                    }
                 });
                 const responseData = await response.json();
                 if(!response.ok){
@@ -181,9 +177,6 @@ const EditTicket = () => {
         getTicket();
         getComments();
         getAttachments();
-        return () => {
-            controller.abort();
-        }
     }, [newCommment,fileUpload]);
 
     return (

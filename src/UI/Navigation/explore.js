@@ -3,15 +3,12 @@ import React, { useContext, useEffect,useState } from "react";
 import { Navbar } from "flowbite-react";
 import AutheContext from "../../store/Authcontext";
 import logo from "../../images/Logo.png";
-import AbortController from "abort-controller";
 
 const Explore = () => {
     const authd = useContext(AutheContext);
     const [expire, setExpire] = useState(false);
 
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
         const getCurrentUser = async () => {
             try {
                 const response = await fetch("http://localhost:9000/api/user/getUser", {
@@ -19,8 +16,7 @@ const Explore = () => {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + localStorage.getItem("token")
-                    },
-                    signal: signal
+                    }
                 });
                 const responseData = await response.json();
 

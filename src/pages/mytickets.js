@@ -4,7 +4,6 @@ import React, {useState, useEffect, useContext} from "react";
 import TicketsList from "../UI/components/Tickets/TicketsList";
 import Authcontext from "../store/Authcontext";
 import { Navigate } from "react-router-dom";
-import AbortController from "abort-controller";
 
 const MyTickets = () => {
     const [tickets, setTickets] = useState([]);
@@ -12,8 +11,6 @@ const MyTickets = () => {
     const jwt = authd.token || localStorage.getItem("token");
 
     useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
     const fetchTickets = async () => {
         try {
             const response = await fetch("http://localhost:9000/api/ticket/getUserTickets", {
@@ -21,8 +18,7 @@ const MyTickets = () => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + jwt
-                },
-                signal: signal
+                }
             });
             const responseData = await response.json();
             if(!response.ok){
@@ -34,9 +30,6 @@ const MyTickets = () => {
         }
     };
     fetchTickets();
-    return () => {
-        controller.abort();
-    }
 }, []);
 
     if(authd.token === null && localStorage.getItem("token") === null){
