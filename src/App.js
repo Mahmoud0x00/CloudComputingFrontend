@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
 import GetArticleByID from "./pages/getArticleByID";
 import AddArticleComment from "./pages/AddArticleComment";
+import GetArticleComments from "./pages/getArticleComments";
 const App = () => {
   return (
     <AuthProvider>
@@ -22,7 +23,8 @@ const App = () => {
             <Route path="/help" element={<HelpPage />} />
             <Route path="/help/article/:id" element={<GetArticleByID />} />
             <Route path="/createArticleComment/:id" element={<AddArticleComment />} />
-            <Route path="/createArticle" element={<CreateArticle />} />
+            <Route path="/help/createArticle" element={<CreateArticle />} />
+            <Route path="/help/article/comments/:id" element={<GetArticleComments />} />
 
           </Routes>
         </Layout>
