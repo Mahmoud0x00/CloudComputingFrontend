@@ -9,7 +9,6 @@ import { Button } from 'flowbite-react';
 const HelpPage = () => {
 
     const [article, setArticle] = useState(null);
-   // const [isLoading, setIsLoading] = useState(true);
 
 
 
@@ -41,12 +40,6 @@ const HelpPage = () => {
         fetchAbortController.abort();
     };
 }, []);
-// if (isLoading) {
-//     return <h1>Please wait while loading Articles...</h1>;
-//   }
-    if (!article) {
-        return <h1>Article not found</h1>;
-    }
 
     return (
         <div className='flex gap-4'>

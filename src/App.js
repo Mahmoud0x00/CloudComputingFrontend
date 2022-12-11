@@ -12,6 +12,12 @@ import Logout from "./pages/logout";
 import Createticket from "./pages/Createticket";
 import Myaccount from "./pages/Myaccount";
 import ViewTicket from "./pages/ViewTicket";
+import HelpPage from "./pages/helpPage";
+import CreateArticle from "./pages/createArticle";
+import GetArticleByID from "./pages/getArticleByID";
+import AddArticleComment from "./pages/AddArticleComment";
+import GetArticleComments from "./pages/getArticleComments";
+
 
 const App = () => {
   return (
@@ -27,6 +33,11 @@ const App = () => {
             <Route path="/createticket" element={<Createticket />} />
             <Route path="/myaccount" element={<Myaccount />} />
             <Route path="/tickets/:ticketId" element={<ViewTicket />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/help/article/:id" element={<GetArticleByID />} />
+            <Route path="/createArticleComment/:id" element={<AddArticleComment />} />
+            <Route path="/help/createArticle" element={<CreateArticle />} />
+            <Route path="/help/article/comments/:id" element={<GetArticleComments />} />
           </Routes>
         </Layout>
       </BrowserRouter>
