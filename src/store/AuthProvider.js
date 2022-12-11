@@ -29,3 +29,4 @@ const AuthProvider = (props) => {
     };
 
 export default AuthProvider;
+export default AuthProvider;
