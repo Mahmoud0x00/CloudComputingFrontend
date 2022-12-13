@@ -13,7 +13,7 @@ const MyTickets = () => {
     useEffect(() => {
     const fetchTickets = async () => {
         try {
-            const response = await fetch("http://localhost:9000/api/ticket/getUserTickets", {
+            const response = await fetch("https://supsys.azurewebsites.net/api/ticket/getUserTickets", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

@@ -11,7 +11,7 @@ const Explore = () => {
     useEffect(() => {
         const getCurrentUser = async () => {
             try {
-                const response = await fetch("http://localhost:9000/api/user/getUser", {
+                const response = await fetch("https://supsys.azurewebsites.net/api/user/getUser", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const AddArticleComment = () => {
     useEffect(() => {
         const fetchArticles = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/article/addComment/${articleID}`,
+                const response = await fetch(`https://supsys.azurewebsites.net/api/article/addComment/${articleID}`,
                     {
                         method: "POST",
                         headers: {

@@ -36,7 +36,7 @@ const EditTicket = () => {
         const {target} = formData;
         console.log('FormData', Object.fromEntries(new FormData(target)));
         try{
-            const response = await fetch(`http://localhost:9000/api/ticket/${id}/comment/`, {
+            const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/${id}/comment/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const EditTicket = () => {
     const deleteAttachmentHandler = async (event) => {
         console.log(JSON.stringify(event));
         try{
-            const response = await fetch(`http://localhost:9000/api/ticket/attachment/${event}`, {
+            const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/attachment/${event}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const EditTicket = () => {
     const FileUploadHandler =  async () => {
         const formData = new FormData();
         formData.append('attachment', file);
-        axios.post(`http://localhost:9000/api/ticket/${id}/attachment/`, formData, {
+        axios.post(`https://supsys.azurewebsites.net/api/ticket/${id}/attachment/`, formData, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -108,7 +108,7 @@ const EditTicket = () => {
     useEffect(() => {
         const getTicket = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/ticket/retrive/${id}`, {
+                const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/retrive/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ const EditTicket = () => {
         };
         const getComments = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/ticket/comments/${id}`, {
+                const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/comments/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ const EditTicket = () => {
         };
         const getAttachments = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/ticket/${id}/attachments`, {
+                const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/${id}/attachments`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -259,7 +259,7 @@ const EditTicket = () => {
                                                     <Button color="red" style={{
                                                     }} onClick={async () => {
                                                         try{
-                                                            const response = await fetch(`http://localhost:9000/api/ticket/comment/${comment._id}`, {
+                                                            const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/comment/${comment._id}`, {
                                                                 method: 'DELETE',
                                                                 headers: {
                                                                     'Content-Type': 'application/json',
@@ -328,7 +328,7 @@ const EditTicket = () => {
                                                     <div>
                                                     <Button content='Edit comment' labelPosition='left' icon='edit' primary onClick={async () => {
                                                         try{
-                                                            const response = await fetch(`http://localhost:9000/api/ticket/comment/${comment._id}`, {
+                                                            const response = await fetch(`https://supsys.azurewebsites.net/api/ticket/comment/${comment._id}`, {
                                                                 method: 'PUT',
                                                                 headers: {
                                                                     'Content-Type': 'application/json',
@@ -389,7 +389,7 @@ const EditTicket = () => {
                             </Header>
                             {attachments.map((attachment) => (
                                 <div key={attachment._id} className="mb-3">
-                                    <a href={"http://localhost:9000/"+attachment.url} target="_blank" rel="noopener noreferrer">
+                                    <a href={"https://supsys.azurewebsites.net/"+attachment.url} target="_blank" rel="noopener noreferrer">
                                         <Icon name="file" />
                                         {attachment.name.split('.')[0]}
                                     </a>

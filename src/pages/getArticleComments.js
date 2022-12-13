@@ -13,7 +13,7 @@ const GetArticleComments = () => {
     useEffect(() => {
             const fetchComments = async () => {
                 try {
-                    const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`);
+                    const response = await fetch(`https://supsys.azurewebsites.net/api/article/getArticleComments/${articleID}`);
                     const responseData = await response.json();
                     if (!response.ok) {
                         throw new Error(responseData.message);

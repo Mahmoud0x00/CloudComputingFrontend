@@ -18,7 +18,7 @@ const Myaccount = () => {
     const { register: register2, handleSubmit: handleSubmit2, formState: formState2 } = useForm();
     const submitHandler = async (formData) => {
         try{
-            const response = await fetch('http://localhost:9000/api/user/edit', {
+            const response = await fetch('https://supsys.azurewebsites.net/api/user/edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const Myaccount = () => {
     }
     const submitHandlerPassword = async (formData) => {
         try{
-            const response = await fetch('http://localhost:9000/api/user/update-password', {
+            const response = await fetch('https://supsys.azurewebsites.net/api/user/update-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const Myaccount = () => {
         }
         const fetchUser = async () => {
             try{
-                const response = await fetch('http://localhost:9000/api/user/getUser', {
+                const response = await fetch('https://supsys.azurewebsites.net/api/user/getUser', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

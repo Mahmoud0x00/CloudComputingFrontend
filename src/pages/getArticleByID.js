@@ -13,7 +13,7 @@ const GetArticleByID = () => {
 
         const DeleteArticle = async (articleID) => {
         try {
-            const response = await fetch(`http://localhost:9000/api/article/deleteArticle/${articleID}`,
+            const response = await fetch(`https://supsys.azurewebsites.net/api/article/deleteArticle/${articleID}`,
                 {
                     method: 'DELETE'
                 }
@@ -33,7 +33,7 @@ const GetArticleByID = () => {
 
         const fetchArticles = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/article/getArticle/${articleID}`);
+                const response = await fetch(`https://supsys.azurewebsites.net/api/article/getArticle/${articleID}`);
                 const responseData = await response.json();
                 if (!response.ok) {
                     throw new Error(responseData.message);
@@ -48,7 +48,7 @@ const GetArticleByID = () => {
 
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/api/article/getArticleComments/${articleID}`);
+                const response = await fetch(`https://supsys.azurewebsites.net/api/article/getArticleComments/${articleID}`);
                 const responseData = await response.json();
                 if (!response.ok) {
                     throw new Error(responseData.message);

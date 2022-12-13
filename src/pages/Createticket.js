@@ -16,7 +16,7 @@ const CreateTicket = () => {
     const token = localStorage.getItem('token') || authcontext.token;
     const submitHandler = async (formData) => {
         try{
-            const response = await fetch('http://localhost:9000/api/ticket/create', {
+            const response = await fetch('https://supsys.azurewebsites.net/api/ticket/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

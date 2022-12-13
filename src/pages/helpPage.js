@@ -16,7 +16,7 @@ const HelpPage = () => {
         
         const fetchArticles = async () => {
            try{
-            const response = await fetch(`http://localhost:9000/api/article/getArticles`);
+            const response = await fetch(`https://supsys.azurewebsites.net/api/article/getArticles`);
             const responseData = await response.json();
             if(!response.ok) {
                 throw new Error(responseData.message);

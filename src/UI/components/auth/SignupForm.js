@@ -13,7 +13,7 @@ const SignUpForm = () => {
 
     const submitHandler = async (formData) => {
         try{
-            const response = await fetch('http://localhost:9000/api/auth/register', {
+            const response = await fetch('https://supsys.azurewebsites.net/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

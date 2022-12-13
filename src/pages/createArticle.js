@@ -13,7 +13,7 @@ useEffect(() => {
 
     const fetchArticles = async () => {
         try {
-            const response = await fetch(`http://localhost:9000/api/article/postArticle`,
+            const response = await fetch(`https://supsys.azurewebsites.net/api/article/postArticle`,
                 {
                     method: 'POST',
                     headers: {
